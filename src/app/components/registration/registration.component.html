@@ -1,0 +1,120 @@
+<p>registration works!</p>
+<form #registration="ngForm" (ngSubmit)="registration(registration.value)" class="stylingform">
+
+<table width=50% class="stylingform" align="center">
+    <tr>
+      <td>
+       <label><b>Enter first name </b></label>
+      </td>
+     <th>
+    <input type="text" name="fname"  required #fname="ngModel"  [(ngModel)]="User.fname" minlength="4" pattern="[a-zA-Z]*"/>
+    <div *ngIf="fname.errors && (fname.dirty || fname.touched)">
+       <div [hidden]="!fname.errors.required">
+        please enter name
+        </div>
+        <div [hidden]="!fname.errors.pattern">
+            please enter minimum 4 characters
+        </div>
+        <div [hidden]="!fname.errors.pattern">
+        please enter both uppercase and lowercase letters
+        </div>
+    </div>  
+</th>
+</tr>
+<tr>
+    <td>
+    <label><b>Email</b></label>
+</td>
+<th>
+    <input type="email" name="email" required #email="ngModel" [(ngModel)]="User.email" pattern="^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$"/> 
+    <div *ngIf="email.errors && (email.dirty || email.touched)">
+        <div [hidden]="!email.errors.required">
+            please enter email
+        </div> 
+        <div [hidden]="!email.errors.pattern">
+            please follow the mail pattern abc@gmail.com
+        </div>
+    </div>
+</th>
+</tr>
+<tr>
+    <td>
+    <label><b>dob</b></label>
+</td>
+<th>
+    <input type="date" name="dob"  required #dob="ngModel" [(ngModel)]="User.dob" />
+    <div *ngIf="dob.errors &&(dob.dirty || dob.touched)">
+        <div [hidden]="!dob.errors.required">
+            please enter dob
+        </div> 
+    </div>
+</th>
+
+</tr>
+
+<tr>
+    <td>
+    <label><b>contact number</b></label>
+</td>
+<th>
+    <input type="number"  name="contactno" required #contactno="ngModel" [(ngModel)]="User.contactno"  minlength="10" maxlength="10" />
+    <div *ngIf="contactno.errors &&(contactno.dirty || contactno.touched)">
+        <div [hidden]="!contactno.errors.required">
+            please enter contact no
+        </div>
+        <div [hidden]="!contactno.errors.minlength">
+            please enter minimum 10 digits
+        </div>
+        <div [hidden]="!contactno.errors.maxlength">
+             maximum 10 digits
+        </div> 
+    </div>
+</th>
+
+</tr>
+
+<tr>
+    <td>
+    <label ><b>Password</b></label>
+</td>
+<th>
+    <input type="password" placeholder="Enter Password" name="password"  required #password [(ngModel)]="User.password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" >
+    <div *ngIf="password.errors &&(password.dirty || password.touched)">
+        <div [hidden]="!password.errors.required">
+            please enter password
+        </div> 
+        <div [hidden]="!password.errors.pattern">
+            please follow the password pattern Password must contain atleast one uppercase letter, one lowercase letter , one number and atleast 8 or more characters 
+        </div>
+    </div>
+</th>
+
+</tr>
+
+<tr>
+    <td>
+    <label ><b>confirm Password</b></label>
+</td>
+<th>
+    <input type="password" placeholder="confirm Password" name="confirmpassword"  required #confirmpassword  [(ngModel)]="User.confirmpassword" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"/>
+    <div *ngIf="confirmpassword.errors &&(confirmpassword.dirty || confirmpassword.touched)">
+        <div [hidden]="!confirmpassword.errors.required">
+            please enter confirm password
+        </div> 
+        <div [hidden]="!confirmpassword.errors.pattern">
+            please follow the password pattern Confirm Password must contain atleast one uppercase letter, one lowercase letter , one number and atleast 8 or more characters 
+        </div>
+    </div>
+</th>
+</tr>
+<tr>
+    <td>
+        <input type="reset" value="clear">
+    </td>
+    <td>
+    <input type="submit" value="Registration" [disabled]="!registration.valid">
+</td>
+
+</tr>
+</table>
+    </form>
